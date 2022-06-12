@@ -71,3 +71,57 @@ public class TriviaApp extends javax.swing.JFrame {
 }
     // #endregion
     // -----------------------------------------------------------------Andres-----------------------------------------------------------------
+
+        // -----------------------------------------------------------------Camilo-----------------------------------------------------------------
+    // #region
+    // Con esta función se obtiene la pregunta y se limpia cuando cambie de pantalla
+    // para así obtener la siguiente pregunta
+    public void escogerPregunta(int n) {
+        preguntaEscogida = baseDePreguntas[n];
+        pregunta = preguntaEscogida[0];
+        respuesta = preguntaEscogida[1];
+        if (preguntaEscogida.length > 5) {
+            img = preguntaEscogida[5];
+        } else {
+            img = "";
+        }
+        Opciones.clear();
+        for (int i = 1; i < 5; i++) {
+            Opciones.add(preguntaEscogida[i]);
+        }
+        for (int i = 0; i < 4; i++) {
+            Collections.shuffle(Opciones);
+        }
+    }
+    // #endregion
+
+    // #region
+    /*
+     * En esta función se muestra la imágen que se va a cargar a la vista del
+     * usuario y se valida si se puede obtener o si no
+     * Tambien se obtiene los distintos botones de repuesta, se setean y se les da
+     * la posición
+     */
+    public void mostrarPregunta() {
+        jLabel1.setText(pregunta);
+        if (img.equals("")) {
+            jLabel2.setVisible(false);
+        } else {
+            jLabel2.setVisible(true);
+            jLabel2.setText("");
+            try {
+                BufferedImage imagen = ImageIO.read(new URL(img));
+                Image imagenEscalada = imagen.getScaledInstance(-1, 200, Image.SCALE_SMOOTH);
+                jLabel2.setIcon(new ImageIcon(imagenEscalada));
+            } catch (Exception e) {
+                jLabel2.setText("La imágen no se pudo cargar");
+                jLabel2.setIcon(null);
+            }
+        }
+        jButton1.setText(Opciones.get(0));
+        jButton2.setText(Opciones.get(1));
+        jButton4.setText(Opciones.get(2));
+        jButton3.setText(Opciones.get(3));
+    }
+    // #endregion
+    // -----------------------------------------------------------------Camilo-----------------------------------------------------------------
