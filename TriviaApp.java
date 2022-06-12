@@ -125,3 +125,63 @@ public class TriviaApp extends javax.swing.JFrame {
     }
     // #endregion
     // -----------------------------------------------------------------Camilo-----------------------------------------------------------------
+// -----------------------------------------------------------------Fabian-----------------------------------------------------------------
+    // #region
+    /*
+     * En esta función se valida si la preguntas están respuestas de manera correcta
+     * y muestra diferentes mensajes según se necesite
+     */
+    void escogerRespuesta(int n) {
+        if (Opciones.get(n).equals(respuesta)) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Su respuesta es correcta",
+                    "Muy bien :)",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Su respuesta es incorrecta, la respuesta es: " + respuesta,
+                    "Que mal :(",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        // se llama a la funcion de jugar() para acabar el programa
+        jugar();
+    }
+    // #endregion
+
+    // #region
+    /*
+     * Se valida que el juego no haya acabado de lo contrario se mostrarán las demas
+     * preguntas
+     */
+    public void jugar() {
+        if (n_pregunta == cantidadDePreguntas) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Juego Terminado",
+                    "Muy bien :)",
+                    JOptionPane.PLAIN_MESSAGE);
+            System.exit(0);
+        }
+        escogerPregunta(n_pregunta);
+        mostrarPregunta();
+        n_pregunta++;
+    }
+
+    public TriviaApp() {
+        for (int i = 0; i < renglones.length; i++) {
+            String renglon = renglones[i];
+            baseDePreguntas[i] = renglon.split("\t");
+        }
+        initComponents();
+        setSize(900, 600);
+        setLocationRelativeTo(null);
+        // setExtendedState(MAXIMIZED_BOTH);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        jugar();
+    }
+
+    //#endregion
+    // -----------------------------------------------------------------Fabian-----------------------------------------------------------------
